@@ -1,0 +1,29 @@
+<nav>
+     <div class="nav-wrapper teal">
+        <a href="#" class="brand-logo center">
+            pokemon-app
+        </a>
+     </div>
+     <!--h1>Pokémons</h1-->
+</nav>
+<!--input
+    #input
+    (keyup.enter)="selectPokemon(input.value)"
+    type="number"
+>
+
+<p *ngIf="pokemonSelected">
+    Vous avez selectionné le pokemon: {{ pokemonSelected?.name  }}
+</p>
+<p *ngIf="!pokemonSelected">
+    Aucun pokemon n'a été selectionné.
+</p>
+
+<p *ngFor="let pokemon of pokemonList">
+    {{ pokemon.name }}
+</p-->
+
+<router-outlet></router-outlet>
+
+
+  
