@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../pokemon';
 import { Router } from '@angular/router';
-import { PokemonService } from '../pokemon.service';
+import { PokemonService } from '../../pokemon.service';
 
 @Component({
   selector: 'app-list-pokemon',
@@ -18,8 +18,8 @@ export class ListPokemonComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pokemonList = this.pokemonService.getPokemonList( ); // on enlève ça maintenant this.pokemonList = POKEMONS;
-    console.table(this.pokemonList);
+    this.pokemonService.getPokemonList()
+      .subscribe(pokemonList => this.pokemonList = pokemonList ); // on enlève ça maintenant this.pokemonList = POKEMONS;
   }
 
   goToPokemon(pokemon: Pokemon) {
