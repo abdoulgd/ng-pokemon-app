@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, switchMap, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { Pokemon } from './pokemon/pokemon';
 import { PokemonService } from './pokemon.service';
 
@@ -38,13 +38,26 @@ export class PokemonJsonServerService implements PokemonService {
     );
   }
 
+  //Recherche un pokemon
+  searchPokemonList(term: string): Observable<Pokemon[]> {
+    if (term.trim().length <= 1) {
+      return of([]);
+    }
+    
+    const url = `${this.POKEMON_API_URL}?q=${term}`;
+    return this.http.get<Pokemon[]>(url).pipe(
+      tap((response) => this.log(response)),
+      catchError(() => this.handleError([]))
+    );
+  }
+
   // Mise à jour du pokémon passé en paramètre et qui existe déjà
   updatePokemon(pokemon: Pokemon): Observable<Pokemon> {
     return this.http.put<Pokemon>(`${this.POKEMON_API_URL}/${pokemon.id}`, pokemon).pipe(
       tap((response) => this.log(response)),
       catchError(this.handleError.bind(this))
     );
-  } 
+  }    
 
   // Ajout d'un nouveau pokémon
   addPokemon(pokemon: Omit<Pokemon, 'id'>): Observable<Pokemon> {
@@ -52,7 +65,7 @@ export class PokemonJsonServerService implements PokemonService {
       tap((response) => this.log(response)),
       catchError(this.handleError.bind(this))
     );
-  } 
+  }
 
   // Suppression du pokémon avec l'identifiant passé en paramètre
   deletePokemon(pokemonId: number): Observable<void> {

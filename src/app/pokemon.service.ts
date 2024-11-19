@@ -9,4 +9,5 @@ export abstract class PokemonService {
   abstract deletePokemon(pokemonId: number): Observable<void>;
   abstract addPokemon(pokemon: Omit<Pokemon, 'id'>): Observable<Pokemon>;
   abstract getPokemonTypeList(): string[];
+  abstract searchPokemonList(term: string): Observable<Pokemon[]>;
 }
