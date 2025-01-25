@@ -33,3 +33,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 `dans pokemon-json-server.service.ts les methode addPokemon, updatePokemon et searchPokemonList. Les deux premieres pour l'id et le dernier pour la recherche de pokemon`
 
 ## Envisager Node JS
+
+## Login
+`pikachu`
+
+## Firebase
+`sudo npm install -g firebase-tools`
+`firebase login`
+`firebase init`
+`firebase deploy --only hosting`
